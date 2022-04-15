@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="br.com.cursoja.agendacurso.model.dao.Conexao" %>
 <%@ page import="br.com.cursoja.agendacurso.model.dao.CursoDao" %>
 <%@ page import="br.com.cursoja.agendacurso.model.entidade.Curso" %>
@@ -10,11 +10,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Página Inicial</title>
+<meta charset="UTF-8">
+<title>PÃ¡gina Inicial</title>
 </head>
 <body>
-	<h1>Olá mundo, agora na "web"</h1>
+	<h1>OlÃ¡ mundo, agora na "web"</h1>
+	
+	<a href="cadastrarcurso.jsp">Cadastrar Curso</a>
+	<a href="cadastrarprofessor.jsp">Cadastrar Professor</a>
 	
 	<%
 		Conexao c = new Conexao();
@@ -50,6 +53,11 @@
 		Curso unico = dao.buscar(1);
 	%>
 		<p><%= unico.getNome() %> - <%= unico.getValor() %></p>
+		
+	<%
+		curso2.setId(2);
+		dao.excluir(curso2);
+	%>
 		
 	<%
 		Professor professor = new Professor();

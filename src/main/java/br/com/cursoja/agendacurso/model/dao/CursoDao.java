@@ -73,6 +73,7 @@ public class CursoDao extends Conexao {
 			
 		} catch(SQLException e) {
 			System.out.println("Erro no Listar.");
+			e.printStackTrace();
 		} finally {
 			fecharConexao();
 		}
@@ -100,11 +101,31 @@ public class CursoDao extends Conexao {
 			
 		} catch(SQLException e) {
 			System.out.println("Erro no Buscar.");
+			e.printStackTrace();
 		} finally {
 			fecharConexao();
 		}
 		
 		return curso;
+	}
+	
+	public void excluir(Curso c) {
+		
+		String sql = "delete from curso where idcurso = ?";
+		
+		try {
+			PreparedStatement ps = getConexao().prepareStatement(sql);
+			ps.setLong(1, c.getId());
+			
+			ps.execute();
+			
+		} catch(SQLException e) {
+			System.out.println("Erro ao Excluir.");
+			e.printStackTrace();
+		} finally {
+			fecharConexao();
+		}
+		
 	}
 
 }

@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.com.cursoja.agendacurso.model.entidade.Curso;
 import br.com.cursoja.agendacurso.model.entidade.Professor;
 
 public class ProfessorDao extends Conexao {
@@ -67,6 +66,7 @@ public class ProfessorDao extends Conexao {
 			
 		} catch(SQLException e) {
 			System.out.println("Erro no Listar.");
+			e.printStackTrace();
 		} finally {
 			fecharConexao();
 		}
@@ -95,10 +95,30 @@ public class ProfessorDao extends Conexao {
 			
 		} catch(SQLException e) {
 			System.out.println("Erro no Buscar.");
+			e.printStackTrace();
 		} finally {
 			fecharConexao();
 		}
 		
 		return professor;
+	}
+	
+	public void excluir(Professor p) {
+		
+		String sql = "delete from professor where idprofessor = ?";
+		
+		try {
+			PreparedStatement ps = getConexao().prepareStatement(sql);
+			ps.setLong(1, p.getId());
+			
+			ps.execute();
+			
+		} catch(SQLException e) {
+			System.out.println("Erro nao Excluir.");
+			e.printStackTrace();
+		} finally {
+			fecharConexao();
+		}
+		
 	}
 }

@@ -12,15 +12,15 @@ import br.com.cursoja.agendacurso.controller.ProfessorController;
 import br.com.cursoja.agendacurso.model.entidade.Professor;
 
 /**
- * Servlet implementation class ProfessorServlet
+ * Servlet implementation class InicioAlterarProfessor
  */
-public class ProfessorServlet extends HttpServlet {
+public class InicioAlterarProfessor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfessorServlet() {
+    public InicioAlterarProfessor() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +30,24 @@ public class ProfessorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		long id = 0;
+		
+		try {
+			id = Long.parseLong(request.getParameter("id"));
+		} catch(Exception e) {
+			
+		}
+		
+		ProfessorController controller = new ProfessorController();
+		Professor p = controller.buscar(id);
+		
+		//System.out.println(p.getNome());
+		
+		request.setAttribute("professor", p);
+		RequestDispatcher rd = request.getRequestDispatcher("alterarprofessor.jsp");
+		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -38,27 +55,7 @@ public class ProfessorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nome = request.getParameter("nomeprofessor");
-		String celular = request.getParameter("celular");
-		String strValorHora = request.getParameter("valorhora");
-		
-		double valor_hora = 0.00;
-		try {
-		valor_hora = Double.parseDouble(strValorHora);
-		} catch (Exception e) {
-			
-		}
-		
-		Professor p = new Professor();
-		p.setNome(nome);
-		p.setCelular(celular);
-		p.setValorHora(valor_hora);
-		
-		ProfessorController controller = new ProfessorController();
-		controller.cadastrar(p);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("listarprofessor.jsp");
-		rd.forward(request, response);
+		//doGet(request, response);
 	}
 
 }

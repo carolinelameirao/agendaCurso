@@ -46,7 +46,7 @@ public class ProfessorDao extends Conexao {
 	public ArrayList<Professor> listar(String nomeBusca) {
 		ArrayList<Professor> lista = new ArrayList<Professor>();
 		
-		String sql = "select * from professor where nome like ?";
+		String sql = "select * from professor where nome like ? order by nome";
 		
 		try {
 			PreparedStatement ps = getConexao().prepareStatement(sql);

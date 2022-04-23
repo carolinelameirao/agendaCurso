@@ -8,19 +8,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import br.com.cursoja.agendacurso.controller.CursoController;
-import br.com.cursoja.agendacurso.model.entidade.Curso;
+import br.com.cursoja.agendacurso.controller.ProfessorController;
+import br.com.cursoja.agendacurso.model.entidade.Professor;
 
 /**
- * Servlet implementation class CursoServlet
+ * Servlet implementation class ExecutaAlteraProfessor
  */
-public class CursoServlet extends HttpServlet {
+public class ExecutaAlteraProfessor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CursoServlet() {
+    public ExecutaAlteraProfessor() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,25 +37,31 @@ public class CursoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String nome = request.getParameter("nomecurso");
-		String strValor = request.getParameter("mensalidade");
+
+		String nome = request.getParameter("nomeProfessor");
+		String celular = request.getParameter("celular");
+		String strvalorHora = request.getParameter("valor_hora");
+		String strId = request.getParameter("id");
 		
-		double valor = 0.00;
+		double valorHora = 0;
+		long id = 0;
 		try {
-		valor = Double.parseDouble(strValor);
-		} catch (Exception e) {
-			
+			valorHora = Double.parseDouble(strvalorHora);
+			id = Long.parseLong(strId);
+		} catch(Exception e) {
+			System.out.println("Erro na conversão.");
 		}
 		
-		Curso c = new Curso();
-		c.setNome(nome);
-		c.setValor(valor);
+		Professor p = new Professor();
+		p.setId(id);
+		p.setNome(nome);
+		p.setCelular(celular);
+		p.setValorHora(valorHora);
 		
-		CursoController controller = new CursoController();
-		controller.cadastrar(c);
+		ProfessorController controller = new ProfessorController();
+		controller.alterar(p);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("listarcurso.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("listarprofessor.jsp");
 		rd.forward(request, response);
 		
 	}

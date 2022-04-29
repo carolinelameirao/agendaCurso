@@ -15,11 +15,20 @@
 	<a href="cadastrarprofessor.jsp">Cadastrar Professor</a>
 	<hr>
 	
-	<!-- <form method="post" action=""> -->
-		<!-- <input type="text" name="nomebuscar"/> -->
-		<!-- input type="submit" value="Pesquisar"/> -->
-	<!-- </form> -->
+	<%
+		String nomeBuscar = request.getParameter("nomeBucar");
+		
+		if(nomeBuscar == null) {
+			nomeBuscar = "";
+		}
+	%>
 	
+	<br>
+	<form method="post" action="">
+		<input type="text" name="nomebuscar" value="<%= nomeBuscar %>"/>
+		<input type="submit" value="Pesquisar"/>
+	</form>
+	<br>
 	<table>
 		<thead>
 			<th>Nome</th>
@@ -29,8 +38,9 @@
 		</thead>
 		<tbody>
 		<%
+		
 			ProfessorController controller = new ProfessorController();
-			ArrayList<Professor> lista = controller.listar("");
+			ArrayList<Professor> lista = controller.listar(nomeBuscar);
 			
 			DecimalFormat fmt = new DecimalFormat("#,##0.00");
 			for(Professor p : lista) {

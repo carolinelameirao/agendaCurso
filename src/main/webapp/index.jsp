@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/estilo.css">
 <title>Página Inicial</title>
 </head>
 <body>
@@ -20,6 +21,10 @@
 	<br>
 	<br>
 	<a href="listarprofessor.jsp">Listar Professor</a>
+	<br>
+	<br>
+	<a href="login.jsp">Área Administrativa</a>
+	
 	
 	
 </body>

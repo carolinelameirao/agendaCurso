@@ -12,13 +12,23 @@
 </head>
 <body>
 
-<a href="cadastrarcurso.jsp">Cadastrar Curso</a>
-<hr>
-
-	<!-- <form method="post" action=""> -->
-		<!-- <input type="text" name="nomebuscar"/> -->
-		<!-- <input type="submit" value="Pesquisar"/> -->
-	<!-- </form> -->
+	<a href="cadastrarcurso.jsp">Cadastrar Curso</a>
+	<hr>
+	
+	<% 
+		String nomeBuscar = request.getParameter("nomeBuscar");
+		
+		if(nomeBuscar == null) {
+			nomeBuscar = "";
+		}
+	%>
+	
+	<br>
+	<form method="post" action="">
+		<input type="text" name="nomeBuscar" value="<%= nomeBuscar %>"/>
+		<input type="submit" value="Buscar"/>
+	</form>
+	<br>
 	
 	<table>
 		<thead>
@@ -28,8 +38,9 @@
 		</thead>
 		<tbody>
 	<%
+			
 		CursoController controller = new CursoController();
-		ArrayList<Curso> lista = controller.listar("");
+		ArrayList<Curso> lista = controller.listar(nomeBuscar);
 		
 		DecimalFormat fmt = new DecimalFormat("#,##0.00");
 		for(Curso c : lista) {
